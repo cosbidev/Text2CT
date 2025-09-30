@@ -5,6 +5,7 @@ This repository hosts the official project page for our work:
 **[Text-to-CT Generation via 3D Latent Diffusion Model with Contrastive Vision-Language Pretraining](https://arxiv.org/abs/2506.00633)**  
 Molino, D., Caruso, C. M., Ruffini, F., Soda, P., Guarrasi, V. (2025)
 
+![alt text](https://github.com/cosbidev/Text2CT/blob/main/model.png)
 ---
 
 ## 🧠 Model Overview
