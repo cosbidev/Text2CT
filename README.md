@@ -39,8 +39,9 @@ pip install -r requirements.txt
 ### Weights (place in `models/`)
 - `autoencoder_epoch273.pt`
 - `unet_rflow_200ep.pt`
-- `CLIP3D_Finding_Impression_30ep.pt` (for report embeddings)
-You can download them from Hugging Face (example):
+- `CLIP3D_Finding_Impression_30ep.pt`
+
+You can download them from Hugging Face at [Weights](https://huggingface.co/dmolino/text2ct-weights):
 ```python
 from huggingface_hub import hf_hub_download
 repo_id = "dmolino/text2ct-weights"
