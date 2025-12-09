@@ -53,10 +53,16 @@ def load_models(args: argparse.Namespace, device: torch.device, logger: logging.
 
     unet = define_instance(args, "diffusion_unet_def").to(device)
     checkpoint = torch.load(f"{args.model_dir}/{args.model_filename}", map_location=device, weights_only=False)
-    unet.load_state_dict(checkpoint["unet_state_dict"], strict=True)
-    logger.info(f"checkpoints {args.model_dir}/{args.model_filename} loaded.")
+    
+    if "unet_state_dict" in checkpoint.keys():
+        unet.load_state_dict(checkpoint["unet_state_dict"], strict=True)
+        scale_factor = checkpoint["scale_factor"]
 
-    scale_factor = checkpoint["scale_factor"]
+    else:
+        unet.load_state_dict(checkpoint, strict=True)
+        scale_factor = 1.0287
+
+    logger.info(f"checkpoints {args.model_dir}/{args.model_filename} loaded.")
     logger.info(f"scale_factor -> {scale_factor}.")
     return autoencoder, unet, scale_factor
 
