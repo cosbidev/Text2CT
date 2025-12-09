@@ -159,9 +159,15 @@ def load_unet(args: argparse.Namespace, device: torch.device, logger: logging.Lo
     else:
         checkpoint_unet = torch.load(f"{args.existing_ckpt_filepath}", map_location=device, weights_only=False)
         if dist.is_initialized():
-            unet.module.load_state_dict(checkpoint_unet["unet_state_dict"], strict=False)
+            if "unet_state_dict" in checkpoint_unet.keys():
+                unet.module.load_state_dict(checkpoint["unet_state_dict"], strict=False)
+            else:
+                unet.module.load_state_dict(checkpoint_unet, strict=False)
         else:
-            unet.load_state_dict(checkpoint_unet["unet_state_dict"], strict=False)
+            if "unet_state_dict" in checkpoint_unet.keys():
+                unet.load_state_dict(checkpoint["unet_state_dict"], strict=False)
+            else:
+                unet.load_state_dict(checkpoint_unet, strict=False)
         logger.info(f"Pretrained checkpoint {args.existing_ckpt_filepath} loaded.")
 
     return unet
